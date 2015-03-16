@@ -12,7 +12,7 @@ namespace System.Web.Mvc.ExpressionLinks
             var expr = actionExpr is LambdaExpression ? actionExpr.Body : actionExpr;
             var mce = expr as MethodCallExpression;
             if (mce == null)
-                throw new ArgumentException("Expression must be a method call", nameof(actionExpr));
+                throw new ArgumentException("Expression must be a method call", /*nameof(actionExpr)*/ "actionExpr"); // TODO: C# 6 nameof
 
             var routeValues = GetActionParameters(mce);
             routeValues.Add("controller", GetControllerName<TController>());
