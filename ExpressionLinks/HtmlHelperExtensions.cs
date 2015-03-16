@@ -35,5 +35,17 @@ namespace System.Web.Mvc.ExpressionLinks
             parseValues.RouteValues.AddObject(routeValues);
             return helper.Action(parseValues.ActionName, parseValues.ControllerName, parseValues.RouteValues);
         }
+
+        public static void RenderAction<TController>
+            ( this HtmlHelper helper
+            , Expression<Action<TController>> actionExpr
+            , object routeValues = null
+            )
+            where TController : Controller
+        {
+            var parseValues = ExpressionParser.Parse(actionExpr);
+            parseValues.RouteValues.AddObject(routeValues);
+            helper.RenderAction(parseValues.ActionName, parseValues.ControllerName, parseValues.RouteValues);
+        }
     }
 }
