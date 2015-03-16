@@ -19,12 +19,7 @@ namespace System.Web.Mvc.ExpressionLinks
             where TController : Controller
         {
             var parseValues = ExpressionParser.Parse(actionExpr);
-            if (routeValues != null)
-            {
-                var overrideDict = new RouteValueDictionary(routeValues);
-                foreach (var pair in overrideDict)
-                    parseValues.RouteValues[pair.Key] = pair.Value;
-            }
+            parseValues.RouteValues.AddObject(routeValues);
             return helper.ActionLink(linkText, parseValues.ActionName, parseValues.ControllerName, protocol,
                 hostName, fragment, parseValues.RouteValues, new RouteValueDictionary(htmlAttributes));
         }
