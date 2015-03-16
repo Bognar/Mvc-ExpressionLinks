@@ -9,8 +9,7 @@ namespace System.Web.Mvc.ExpressionLinks
     {
         public static MvcHtmlString ActionLink<TController>(this HtmlHelper helper, string linkText, Expression<Action<TController>> actionExpr) where TController : Controller
         {
-            var expr = actionExpr is LambdaExpression ? actionExpr.Body : actionExpr;
-            var mce = expr as MethodCallExpression;
+            var mce = actionExpr.Body as MethodCallExpression;
             if (mce == null)
                 throw new ArgumentException("Expression must be a method call", /*nameof(actionExpr)*/ "actionExpr"); // TODO: C# 6 nameof
 
